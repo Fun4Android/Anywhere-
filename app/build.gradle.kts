@@ -15,7 +15,6 @@ val verCode = 2050500
 
 android {
   compileSdk = 34
-  ndkVersion = "25.0.8775105"
 
   defaultConfig {
     applicationId = "com.absinthe.anywhere_"
@@ -175,7 +174,7 @@ dependencies {
   implementation("com.microsoft.appcenter:appcenter-crashes:${appCenterSdkVersion}")
 
   //Android X
-  val roomVersion = "2.6.0"
+  val roomVersion = "2.5.2"
   implementation("androidx.room:room-runtime:${roomVersion}")
   implementation("androidx.room:room-ktx:${roomVersion}")
   ksp("androidx.room:room-compiler:${roomVersion}")
