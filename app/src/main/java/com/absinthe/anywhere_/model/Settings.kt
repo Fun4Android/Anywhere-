@@ -13,7 +13,8 @@ import com.absinthe.anywhere_.utils.manager.IconPackManager.IconPack
 import com.tencent.mmkv.MMKV
 import jonathanfinerty.once.Once
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 object Settings {
 

@@ -14,7 +14,6 @@ import com.absinthe.anywhere_.view.app.AnywhereDialogBuilder
 import com.absinthe.anywhere_.view.app.AnywhereDialogFragment
 import com.absinthe.anywhere_.viewbuilder.entity.CardListDialogBuilder
 import com.absinthe.libraries.utils.extensions.dp
-import java.util.*
 
 class CardListDialogFragment : AnywhereDialogFragment() {
 
