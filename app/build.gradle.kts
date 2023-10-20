@@ -15,6 +15,8 @@ val verCode = 2050500
 
 android {
   compileSdk = 34
+  ndkVersion = "26.1.10909125"
+  buildToolsVersion = "34.0.0"
 
   defaultConfig {
     applicationId = "com.absinthe.anywhere_"
@@ -70,6 +72,10 @@ android {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
   }
+  dependenciesInfo {
+    includeInBundle = false
+    includeInApk = false
+  }
 
   androidComponents.onVariants { v ->
     val variant: ApplicationVariantImpl =
@@ -79,8 +85,6 @@ android {
       it.outputFileName.set("Anywhere-${verName}-${verCode}-${variant.name}.apk")
     }
   }
-
-  dependenciesInfo.includeInApk = false
 
     externalNativeBuild {
         cmake {
@@ -227,7 +231,7 @@ dependencies {
   implementation("com.leinardi.android:speed-dial:3.3.0")
   implementation("me.zhanghai.android.fastscroll:library:1.3.0")
 
-  val shizukuVersion = "13.1.5"
+  val shizukuVersion = "12.2.0"
   // required by Shizuku and Sui
   implementation("dev.rikka.shizuku:api:$shizukuVersion")
   // required by Shizuku
