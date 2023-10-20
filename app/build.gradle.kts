@@ -181,7 +181,7 @@ dependencies {
   ksp("androidx.room:room-compiler:${roomVersion}")
   androidTestImplementation("androidx.room:room-testing:${roomVersion}")
 
-  val lifecycleVersion = "2.6.1"
+  val lifecycleVersion = "2.6.2"
   implementation("androidx.lifecycle:lifecycle-livedata-ktx:${lifecycleVersion}")
   implementation("androidx.lifecycle:lifecycle-common-java8:${lifecycleVersion}")
   implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}")
@@ -198,7 +198,7 @@ dependencies {
   implementation("androidx.activity:activity-ktx:1.8.0")
   implementation("androidx.fragment:fragment-ktx:1.6.1")
   implementation("androidx.palette:palette-ktx:1.0.0")
-  implementation("androidx.core:core-ktx:1.10.1")
+  implementation("androidx.core:core-ktx:1.12.0")
   implementation("androidx.preference:preference-ktx:1.2.1")
 
   //Google
@@ -214,7 +214,7 @@ dependencies {
   implementation("com.tencent:mmkv-static:1.3.1")
   implementation("com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.11")
   implementation("com.github.heruoxin.Delegated-Scopes-Manager:client:master-SNAPSHOT")
-  implementation("com.github.topjohnwu.libsu:core:5.2.0")
+  implementation("com.github.topjohnwu.libsu:core:5.2.1")
   implementation("com.github.thegrizzlylabs:sardine-android:0.8")
   implementation("com.jonathanfinerty.once:once:1.3.1")
   implementation("org.lsposed.hiddenapibypass:hiddenapibypass:4.3")
