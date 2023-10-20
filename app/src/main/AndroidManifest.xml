@@ -42,6 +42,7 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
     android:usesCleartextTraffic="true"
+    android:enableOnBackInvokedCallback="true"
     tools:targetApi="33">
 
     <!--    Home    -->

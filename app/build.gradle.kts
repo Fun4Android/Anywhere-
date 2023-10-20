@@ -28,7 +28,7 @@ android {
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     manifestPlaceholders["appName"] = "Anywhere-"
     ndk {
-      abiFilters += arrayOf("armeabi-v7a", "arm64-v8a")
+      abiFilters += arrayOf("arm64-v8a")
     }
     resourceConfigurations += arrayOf("en", "zh-rCN", "zh-rTW", "zh-rHK")
   }
@@ -51,8 +51,8 @@ android {
       buildConfigField("boolean", "BETA", "true")
     }
     release {
-      isMinifyEnabled = true
-      isShrinkResources = true
+//      isMinifyEnabled = true
+//      isShrinkResources = true
       proguardFiles(
         getDefaultProguardFile("proguard-android-optimize.txt"),
         "proguard-rules.pro"
