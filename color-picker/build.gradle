@@ -5,7 +5,7 @@ android {
 
 	defaultConfig {
     namespace "com.flask.colorpicker"
-		minSdkVersion 23
+		minSdkVersion 24
 		targetSdkVersion 33
 		versionCode 18
 		versionName "0.0.16"
