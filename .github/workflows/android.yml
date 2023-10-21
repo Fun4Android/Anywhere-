@@ -76,7 +76,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: mappings
-          path: "app/build/outputs/mapping/release"
+          path: "app/build/outputs/*"
 
       - name: Get Apk Info
         if: success() && github.event_name != 'pull_request' && github.repository == 'zhaobozhen/Anywhere-'
