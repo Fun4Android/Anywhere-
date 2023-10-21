@@ -51,8 +51,8 @@ android {
       buildConfigField("boolean", "BETA", "true")
     }
     release {
-//      isMinifyEnabled = true
-//      isShrinkResources = true
+      isMinifyEnabled = true
+      isShrinkResources = true
       proguardFiles(
         getDefaultProguardFile("proguard-android-optimize.txt"),
         "proguard-rules.pro"
@@ -99,7 +99,8 @@ android {
       excludes += "kotlin/**"
       excludes += "org/**"
       excludes += "**.properties"
-      excludes += "**.bin"
+      excludes += "XPP3_1.1.3.2_VERSION"
+      excludes += "XPP3_1.1.3.3_VERSION"
     }
   }
 }
