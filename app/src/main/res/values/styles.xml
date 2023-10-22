@@ -108,4 +108,17 @@
     <item name="fontFamily">monospace</item>
   </style>
 
+  <style name="Widget.App.ExtendedFloatingActionButton" parent="Widget.Material3.ExtendedFloatingActionButton.Icon.Primary">
+    <item name="materialThemeOverlay">@style/ThemeOverlay.App.FloatingActionButton</item>
+  </style>
+
+  <style name="Widget.App.FloatingActionButton" parent="Widget.Material3.FloatingActionButton.Primary">
+    <item name="materialThemeOverlay">@style/ThemeOverlay.App.FloatingActionButton</item>
+  </style>
+
+  <style name="ThemeOverlay.App.FloatingActionButton" parent="">
+    <item name="colorContainer">?attr/colorSecondaryContainer</item>
+    <item name="colorOnContainer">?attr/colorOnSecondaryContainer</item>
+  </style>
+
 </resources>

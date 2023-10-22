@@ -17,6 +17,9 @@
 
     <item name="bottomSheetHeaderHandlerColor">@color/bottom_sheet_header_handler</item>
     <item name="bottomSheetHeaderHandlerColorActivated">@color/bottom_sheet_header_handler_activated</item>
+
+    <item name="extendedFloatingActionButtonStyle">@style/Widget.App.ExtendedFloatingActionButton</item>
+    <item name="floatingActionButtonStyle">@style/Widget.App.FloatingActionButton</item>
   </style>
 
   <style name="Theme" parent="Base.AppTheme" />
