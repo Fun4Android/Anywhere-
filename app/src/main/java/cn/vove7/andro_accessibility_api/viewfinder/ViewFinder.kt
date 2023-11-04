@@ -9,7 +9,6 @@ import cn.vove7.andro_accessibility_api.viewnode.ViewNode
  * 查找符合条件的AccessibilityNodeInfo
  * @param node 开始节点
  */
-@Suppress("MemberVisibilityCanBePrivate", "unused")
 abstract class ViewFinder(val node: ViewNode?) {
 
   companion object {

@@ -115,6 +115,7 @@ abstract class FindBuilderWithOperation : ViewOperation {
 
   override var hintText: CharSequence?
     get() = node.hintText
+    @RequiresApi(Build.VERSION_CODES.O)
     set(value) {
       node.hintText = value
     }

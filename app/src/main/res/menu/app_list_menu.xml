@@ -6,12 +6,12 @@
     android:id="@+id/search"
     android:icon="@drawable/ic_search"
     android:title="@string/menu_search"
-    app:actionViewClass="androidx.appcompat.widget.SearchView"
-    app:showAsAction="always|collapseActionView"
-    tools:ignore="AlwaysShowAction" />
+    tools:ignore="AlwaysShowAction"
+    android:showAsAction="always|collapseActionView"
+    android:actionViewClass="androidx.appcompat.widget.SearchView" />
 
   <item
     android:id="@+id/show_system_app"
     android:title="@string/menu_show_system_app"
-    app:showAsAction="never" />
+    android:showAsAction="never" />
 </menu>

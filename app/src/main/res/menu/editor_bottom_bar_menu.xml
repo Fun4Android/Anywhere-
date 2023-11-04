@@ -7,7 +7,7 @@
     android:id="@+id/trying_run"
     android:icon="@drawable/ic_play"
     android:title="@string/menu_trying_run"
-    app:showAsAction="always"
-    tools:ignore="AlwaysShowAction" />
+    tools:ignore="AlwaysShowAction"
+    android:showAsAction="always" />
 
 </menu>

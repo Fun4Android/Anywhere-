@@ -5,12 +5,12 @@
     android:id="@+id/search"
     android:icon="@drawable/ic_search"
     android:title="@string/menu_search"
-    app:actionViewClass="androidx.appcompat.widget.SearchView"
-    app:showAsAction="always|collapseActionView" />
+    android:showAsAction="always|collapseActionView"
+    android:actionViewClass="androidx.appcompat.widget.SearchView" />
 
   <item
     android:id="@+id/open_detail"
     android:icon="@drawable/ic_outline_info_24"
     android:title="@string/menu_open_detail"
-    app:showAsAction="always" />
+    android:showAsAction="always" />
 </menu>

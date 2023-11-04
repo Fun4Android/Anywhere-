@@ -274,6 +274,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
   }
 
   override fun onBackPressed() {
+    super.onBackPressed()
     when {
       binding.drawer.isDrawerVisible(GravityCompat.START) -> {
         binding.drawer.closeDrawer(GravityCompat.START)

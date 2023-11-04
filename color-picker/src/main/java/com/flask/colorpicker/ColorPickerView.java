@@ -40,7 +40,7 @@ public class ColorPickerView extends View {
 	private float alpha = 1;
 	private int backgroundColor = 0x00000000;
 
-	private Integer initialColors[] = new Integer[]{null, null, null, null, null};
+	private Integer[] initialColors = new Integer[]{null, null, null, null, null};
 	private int colorSelection = 0;
 	private Integer initialColor;
 	private Integer pickerColorEditTextColor;

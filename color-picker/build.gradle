@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 
 android {
 	compileSdk 34
+  //noinspection GrDeprecatedAPIUsage
   buildToolsVersion "34.0.0"
 
 	defaultConfig {

@@ -34,17 +34,17 @@ public class DefrostHandler {
 
     switch (GlobalValues.INSTANCE.getDefrostMode()) {
       case Const.DEFROST_MODE_DSM:
-        return defrostWithDelegatedScopeManager(context, packageName, listener);
+        return !defrostWithDelegatedScopeManager(context, packageName, listener);
       case Const.DEFROST_MODE_ICEBOX_SDK:
-        return defrostWithIceBoxSDK(context, packageName, listener);
+        return !defrostWithIceBoxSDK(context, packageName, listener);
       case Const.DEFROST_MODE_DPM:
-        return defrostWithDevicePolicyManager(context, packageName, listener);
+        return !defrostWithDevicePolicyManager(context, packageName, listener);
       case Const.DEFROST_MODE_ROOT:
-        return defrostWithRoot(packageName, listener);
+        return !defrostWithRoot(packageName, listener);
       case Const.DEFROST_MODE_SHIZUKU:
-        return defrostWithShizuku(packageName, listener);
+        return !defrostWithShizuku(packageName, listener);
       default:
-        return false;
+        return true;
     }
   }
 

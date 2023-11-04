@@ -5,6 +5,6 @@
     android:id="@+id/toolbar_rate"
     android:icon="@drawable/ic_heart"
     android:title="@string/menu_rate"
-    app:showAsAction="always" />
+    android:showAsAction="always" />
 
 </menu>

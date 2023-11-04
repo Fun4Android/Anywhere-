@@ -48,7 +48,6 @@ public class LogRecorder {
   private int mFileSizeLimitation;
   private int mLevel;
   private int mPID = INVALID_PID;
-  private boolean mUseLogcatFileOut = false;
   private LogDumper mLogDumper = null;
 
   private LogRecorder() {
@@ -131,7 +130,6 @@ public class LogRecorder {
     // logcat -f , but the rotated count default is 4?
     // can`t be sure to use that feature
     if (mPID != INVALID_PID) {
-      mUseLogcatFileOut = false;
       String pidStr = adjustPIDStr();
       if (!TextUtils.isEmpty(pidStr)) {
         stringBuilder.append(SPACE);
@@ -340,39 +338,6 @@ public class LogRecorder {
      */
     private int mPID = LogRecorder.INVALID_PID;
 
-    /**
-     * which log buffer to catch...
-     * <p/>
-     * Request alternate ring buffer, 'main', 'system', 'radio'
-     * or 'events'. Multiple -b parameters are allowed and the
-     * results are interleaved.
-     * <p/>
-     * The default is -b main -b system.
-     */
-    private int mLogBuffersSelected = LogRecorder.LOG_BUFFER_DEFAULT;
-
-    /**
-     * log output format, don`t support config yet, use $time format as default.
-     * <p/>
-     * Log messages contain a number of metadata fields, in addition to the tag and priority.
-     * You can modify the output format for messages so that they display a specific metadata
-     * field. To do so, you use the -v option and specify one of the supported output formats
-     * listed below.
-     * <p/>
-     * brief       — Display priority/tag and PID of the process issuing the message.
-     * process     — Display PID only.
-     * tag         — Display the priority/tag only.
-     * thread      — Display the priority, tag, and the PID(process ID) and TID(thread ID)
-     * of the thread issuing the message.
-     * raw         — Display the raw log message, with no other metadata fields.
-     * time        — Display the date, invocation time, priority/tag, and PID of
-     * the process issuing the message.
-     * thread time — Display the date, invocation time, priority, tag, and the PID(process ID)
-     * and TID(thread ID) of the thread issuing the message.
-     * long        — Display all metadata fields and separate messages with blank lines.
-     */
-    private int mLogOutFormat;
-
     public Builder(Context context) {
       mContext = context;
     }
@@ -468,7 +433,15 @@ public class LogRecorder {
      * @return the same Builder
      */
     public Builder setLogBufferSelected(int logBuffersSelected) {
-      this.mLogBuffersSelected = logBuffersSelected;
+      /**
+       * which log buffer to catch...
+       * <p/>
+       * Request alternate ring buffer, 'main', 'system', 'radio'
+       * or 'events'. Multiple -b parameters are allowed and the
+       * results are interleaved.
+       * <p/>
+       * The default is -b main -b system.
+       */
       return this;
     }
 
@@ -479,7 +452,26 @@ public class LogRecorder {
      * @return the same Builder
      */
     public Builder setLogOutFormat(int logOutFormat) {
-      this.mLogOutFormat = logOutFormat;
+      /**
+       * log output format, don`t support config yet, use $time format as default.
+       * <p/>
+       * Log messages contain a number of metadata fields, in addition to the tag and priority.
+       * You can modify the output format for messages so that they display a specific metadata
+       * field. To do so, you use the -v option and specify one of the supported output formats
+       * listed below.
+       * <p/>
+       * brief       — Display priority/tag and PID of the process issuing the message.
+       * process     — Display PID only.
+       * tag         — Display the priority/tag only.
+       * thread      — Display the priority, tag, and the PID(process ID) and TID(thread ID)
+       * of the thread issuing the message.
+       * raw         — Display the raw log message, with no other metadata fields.
+       * time        — Display the date, invocation time, priority/tag, and PID of
+       * the process issuing the message.
+       * thread time — Display the date, invocation time, priority, tag, and the PID(process ID)
+       * and TID(thread ID) of the thread issuing the message.
+       * long        — Display all metadata fields and separate messages with blank lines.
+       */
       return this;
     }
 

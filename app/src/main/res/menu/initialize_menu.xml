@@ -5,5 +5,5 @@
     android:id="@+id/toolbar_initialize_done"
     android:icon="@drawable/ic_done"
     android:title="@string/menu_done"
-    app:showAsAction="always" />
+    android:showAsAction="always" />
 </menu>

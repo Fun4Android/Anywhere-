@@ -5,5 +5,5 @@
     android:id="@+id/toolbar_settings"
     android:icon="@drawable/ic_settings_outline"
     android:title="@string/menu_settings"
-    app:showAsAction="always" />
+    android:showAsAction="always" />
 </menu>
