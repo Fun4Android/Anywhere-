@@ -117,7 +117,7 @@ static jstring ToMd5(JNIEnv *env, jbyteArray source) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_absinthe_anywhere_1_utils_manager_IzukoHelper_checkSignature(JNIEnv *env, jclass clazz) {
+Java_com_absinthe_anywhere_1_utils_manager_IzukoHelper_checkSignature(JNIEnv *env) {
 
     jobject context = getApplication(env);
     // get Context object
@@ -167,34 +167,4 @@ Java_com_absinthe_anywhere_1_utils_manager_IzukoHelper_checkSignature(JNIEnv *en
     if (strcmp(c_msg, RELEASE_SIGN_MD5) != 0) {
         exit(0);
     }
-}
-
-extern "C"
-JNIEXPORT jboolean JNICALL
-Java_com_absinthe_anywhere_1_utils_manager_IzukoHelper_isHitagi(JNIEnv *env, jobject clazz,
-                                                                jstring token) {
-    jobject context = getApplication(env);
-    // get Context object
-    jclass cls = env->GetObjectClass(context);
-    jmethodID method = env->GetMethodID(cls, "getContentResolver",
-                                        "()Landroid/content/ContentResolver;");
-    jobject resolverInstance = env->CallObjectMethod(context, method);
-
-    // get android_id from android Settings$Secure
-    jclass androidSettingsClass = env->FindClass("android/provider/Settings$Secure");
-    jmethodID methodId = env->GetStaticMethodID(androidSettingsClass, "getString",
-                                                "(Landroid/content/ContentResolver;Ljava/lang/String;)Ljava/lang/String;");
-    jstring param_android_id = env->NewStringUTF("android_id");
-    auto android_id = (jstring) env->CallStaticObjectMethod(androidSettingsClass, methodId,
-                                                            resolverInstance, param_android_id);
-
-    jclass cipherClass = env->FindClass("com/absinthe/anywhere_/utils/CipherUtils");
-    jmethodID encryptMethodId = env->GetStaticMethodID(cipherClass, "encrypt",
-            "(Ljava/lang/String;)Ljava/lang/String;");
-    auto encrypt_android_id = (jstring) env->CallStaticObjectMethod(cipherClass, encryptMethodId, android_id);
-
-    char *nativeString1 = const_cast<char *>(env->GetStringUTFChars(token, JNI_FALSE));
-    char *nativeString2 = const_cast<char *>(env->GetStringUTFChars(encrypt_android_id, JNI_FALSE));
-
-    return static_cast<jboolean>(strcmp(nativeString1, nativeString2) == 0);
 }
