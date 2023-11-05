@@ -32,20 +32,16 @@ public class DefrostHandler {
       ToastUtil.makeText(R.string.toast_defrosting);
     }
 
-    switch (GlobalValues.INSTANCE.getDefrostMode()) {
-      case Const.DEFROST_MODE_DSM:
-        return !defrostWithDelegatedScopeManager(context, packageName, listener);
-      case Const.DEFROST_MODE_ICEBOX_SDK:
-        return !defrostWithIceBoxSDK(context, packageName, listener);
-      case Const.DEFROST_MODE_DPM:
-        return !defrostWithDevicePolicyManager(context, packageName, listener);
-      case Const.DEFROST_MODE_ROOT:
-        return !defrostWithRoot(packageName, listener);
-      case Const.DEFROST_MODE_SHIZUKU:
-        return !defrostWithShizuku(packageName, listener);
-      default:
-        return true;
-    }
+      return !switch (GlobalValues.INSTANCE.getDefrostMode()) {
+        case Const.DEFROST_MODE_DSM ->
+          !defrostWithDelegatedScopeManager(context, packageName, listener);
+        case Const.DEFROST_MODE_ICEBOX_SDK -> !defrostWithIceBoxSDK(context, packageName, listener);
+        case Const.DEFROST_MODE_DPM ->
+          !defrostWithDevicePolicyManager(context, packageName, listener);
+        case Const.DEFROST_MODE_ROOT -> !defrostWithRoot(packageName, listener);
+        case Const.DEFROST_MODE_SHIZUKU -> !defrostWithShizuku(packageName, listener);
+        default -> true;
+      };
   }
 
   private static boolean defrostWithDelegatedScopeManager(@NonNull Context context,

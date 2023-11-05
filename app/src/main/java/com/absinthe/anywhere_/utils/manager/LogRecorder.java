@@ -143,22 +143,16 @@ public class LogRecorder {
   }
 
   private String getLevelStr() {
-    switch (mLevel) {
-      case 2:
-        return "V";
-      case 3:
-        return "D";
-      case 4:
-        return "I";
-      case 5:
-        return "W";
-      case 6:
-        return "E";
-      case 7:
-        return "F";
-    }
+      return switch (mLevel) {
+          case 2 -> "V";
+          case 3 -> "D";
+          case 4 -> "I";
+          case 5 -> "W";
+          case 6 -> "E";
+          case 7 -> "F";
+          default -> "V";
+      };
 
-    return "V";
   }
 
   /**

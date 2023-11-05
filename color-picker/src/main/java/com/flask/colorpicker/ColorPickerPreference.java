@@ -125,12 +125,7 @@ public class ColorPickerPreference extends Preference {
 			.wheelType(wheelType)
 			.density(density)
 			.showColorEdit(pickerColorEdit)
-			.setPositiveButton(pickerButtonOk, new ColorPickerClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int selectedColorFromPicker, Integer[] allColors) {
-					setValue(selectedColorFromPicker);
-				}
-			})
+			.setPositiveButton(pickerButtonOk, (dialog, selectedColorFromPicker, allColors) -> setValue(selectedColorFromPicker))
 			.setNegativeButton(pickerButtonCancel, null);
 
 		if (!alphaSlider && !lightSlider) builder.noSliders();

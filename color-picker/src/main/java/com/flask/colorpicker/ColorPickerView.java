@@ -482,17 +482,14 @@ public class ColorPickerView extends View {
 			ImageView childImage = (ImageView) childLayout.findViewById(R.id.image_preview);
 			childImage.setClickable(true);
 			childImage.setTag(i);
-			childImage.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (v == null)
-						return;
-					Object tag = v.getTag();
-					if (tag == null || !(tag instanceof Integer))
-						return;
-					setSelectedColor((int) tag);
-				}
-			});
+			childImage.setOnClickListener(v -> {
+                if (v == null)
+                    return;
+                Object tag = v.getTag();
+                if (tag == null || !(tag instanceof Integer))
+                    return;
+                setSelectedColor((int) tag);
+            });
 		}
 	}
 
