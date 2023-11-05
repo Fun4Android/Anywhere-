@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+
 import com.flask.colorpicker.builder.ColorWheelRendererBuilder;
 import com.flask.colorpicker.builder.PaintBuilder;
 import com.flask.colorpicker.renderer.ColorWheelRenderOption;
@@ -272,7 +274,7 @@ public class ColorPickerView extends View {
 	}
 
 	@Override
-	protected void onDraw(Canvas canvas) {
+	protected void onDraw(@NonNull Canvas canvas) {
 		super.onDraw(canvas);
 		canvas.drawColor(backgroundColor);
 

@@ -270,7 +270,7 @@ public class ColorPickerDialogBuilder {
 	}
 
 	private Integer getStartOffset(Integer[] colors) {
-		Integer start = 0;
+		int start = 0;
 		for (int i = 0; i < colors.length; i++) {
 			if (colors[i] == null) {
 				return start;

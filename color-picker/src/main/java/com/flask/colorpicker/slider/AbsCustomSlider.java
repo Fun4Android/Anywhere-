@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.DimenRes;
+import androidx.annotation.NonNull;
 
 import com.flask.colorpicker.R;
 
@@ -86,7 +87,7 @@ public abstract class AbsCustomSlider extends View {
 	}
 
 	@Override
-	protected void onDraw(Canvas canvas) {
+	protected void onDraw(@NonNull Canvas canvas) {
 		super.onDraw(canvas);
 
 		int width;
@@ -104,7 +105,7 @@ public abstract class AbsCustomSlider extends View {
 
 		if (bar != null && bitmapCanvas != null) {
 			bitmapCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
-			bitmapCanvas.drawBitmap(bar, barOffsetX, (height - bar.getHeight()) / 2, null);
+			bitmapCanvas.drawBitmap(bar, barOffsetX, (float) (height - bar.getHeight()) / 2, null);
 
 			float x = handleRadius + value * (width - handleRadius * 2);
 			float y = height / 2f;

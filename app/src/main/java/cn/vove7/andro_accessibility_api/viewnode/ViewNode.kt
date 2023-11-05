@@ -276,8 +276,7 @@ class ViewNode(val node: AccessibilityNodeInfo) : ViewOperation, Comparable<View
       text,
       node.contentDescription,
       classType,
-      boundsInParent,
-      bounds
+        bounds
 //                node.isClickable,
 //                null,
 //                node.canOpenPopup()

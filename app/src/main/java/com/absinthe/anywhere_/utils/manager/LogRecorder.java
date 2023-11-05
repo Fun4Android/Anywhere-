@@ -258,7 +258,7 @@ public class LogRecorder {
             out.write(data);
             if (logFileLimitation != 0) {
               currentFileSize += data.length;
-              if (currentFileSize > logFileLimitation * 1024) {
+              if (currentFileSize > logFileLimitation * 1024L) {
                 restartHandler.sendEmptyMessage(EVENT_RESTART_LOG);
                 break;
               }

@@ -14,7 +14,6 @@ class ViewInfo(
   val text: CharSequence?,
   val desc: CharSequence?,
   val type: CharSequence?,
-  val boundsInParent: Rect,
   val boundsInScreen: Rect,
 //        val clickable: Boolean,
   val image: Bitmap? = null
