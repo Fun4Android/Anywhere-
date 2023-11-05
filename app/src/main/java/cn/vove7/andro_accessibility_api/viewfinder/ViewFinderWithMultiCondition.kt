@@ -89,7 +89,7 @@ class ViewFinderWithMultiCondition(node: ViewNode? = null) : ViewFinder(node) {
    */
   override fun findCondition(node: AccessibilityNodeInfo): Boolean {
     //could not remove "$.." prevent cause null
-    val vid = "${node.viewIdResourceName}"
+    val vid = node.viewIdResourceName
     if (viewId != null) {
       if (!vid.endsWith("/$viewId") && vid != viewId)
       // :id/view_id) //网页视图 id : id

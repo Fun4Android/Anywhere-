@@ -238,8 +238,7 @@ class ViewNode(val node: AccessibilityNodeInfo) : ViewOperation, Comparable<View
       p = node.parent
       i++
     }
-    val b = i != TRY_OP_NUM
-    return b
+    return i != TRY_OP_NUM
   }
 
   override fun getCenterPoint(): Point {

@@ -1,6 +1,5 @@
 package cn.vove7.andro_accessibility_api.api
 
-import android.util.Log
 import android.view.accessibility.AccessibilityNodeInfo
 import cn.vove7.andro_accessibility_api.AccessibilityApi
 import cn.vove7.andro_accessibility_api.utils.times
