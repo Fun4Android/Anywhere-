@@ -8,9 +8,9 @@ import com.flask.colorpicker.builder.PaintBuilder;
 
 public class ColorCircleDrawable extends ColorDrawable {
 	private float strokeWidth;
-	private Paint strokePaint = PaintBuilder.newPaint().style(Paint.Style.STROKE).stroke(strokeWidth).color(0xff9e9e9e).build();
-	private Paint fillPaint = PaintBuilder.newPaint().style(Paint.Style.FILL).color(0).build();
-	private Paint fillBackPaint = PaintBuilder.newPaint().shader(PaintBuilder.createAlphaPatternShader(26)).build();
+	private final Paint strokePaint = PaintBuilder.newPaint().style(Paint.Style.STROKE).stroke(strokeWidth).color(0xff9e9e9e).build();
+	private final Paint fillPaint = PaintBuilder.newPaint().style(Paint.Style.FILL).color(0).build();
+	private final Paint fillBackPaint = PaintBuilder.newPaint().shader(PaintBuilder.createAlphaPatternShader(26)).build();
 
 	public ColorCircleDrawable(int color) {
 		super(color);

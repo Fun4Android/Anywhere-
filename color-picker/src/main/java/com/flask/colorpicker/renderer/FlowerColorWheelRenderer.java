@@ -7,8 +7,8 @@ import com.flask.colorpicker.ColorCircle;
 import com.flask.colorpicker.builder.PaintBuilder;
 
 public class FlowerColorWheelRenderer extends AbsColorWheelRenderer {
-	private Paint selectorFill = PaintBuilder.newPaint().build();
-	private float[] hsv = new float[3];
+	private final Paint selectorFill = PaintBuilder.newPaint().build();
+	private final float[] hsv = new float[3];
 
   @Override
 	public void draw() {

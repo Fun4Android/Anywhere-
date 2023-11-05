@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import com.absinthe.anywhere_.R
-import com.absinthe.libchecker.view.AViewGroup
+import com.absinthe.anywhere_.view.AViewGroup
 
 class ToastView(context: Context) : AViewGroup(context) {
 

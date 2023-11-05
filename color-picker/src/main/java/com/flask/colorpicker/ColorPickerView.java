@@ -45,17 +45,17 @@ public class ColorPickerView extends View {
 	private int colorSelection = 0;
 	private Integer initialColor;
 	private Integer pickerColorEditTextColor;
-	private Paint colorWheelFill = PaintBuilder.newPaint().color(0).build();
-  private Paint alphaPatternPaint = PaintBuilder.newPaint().build();
+	private final Paint colorWheelFill = PaintBuilder.newPaint().color(0).build();
+  private final Paint alphaPatternPaint = PaintBuilder.newPaint().build();
 	private ColorCircle currentColorCircle;
 
-	private ArrayList<OnColorChangedListener> colorChangedListeners = new ArrayList<>();
-	private ArrayList<OnColorSelectedListener> listeners = new ArrayList<>();
+	private final ArrayList<OnColorChangedListener> colorChangedListeners = new ArrayList<>();
+	private final ArrayList<OnColorSelectedListener> listeners = new ArrayList<>();
 
 	private LightnessSlider lightnessSlider;
 	private AlphaSlider alphaSlider;
 	private EditText colorEdit;
-	private TextWatcher colorTextChange = new TextWatcher() {
+	private final TextWatcher colorTextChange = new TextWatcher() {
 		@Override
 		public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 		}

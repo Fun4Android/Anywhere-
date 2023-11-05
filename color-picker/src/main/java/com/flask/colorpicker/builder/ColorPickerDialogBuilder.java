@@ -24,9 +24,9 @@ import com.flask.colorpicker.slider.AlphaSlider;
 import com.flask.colorpicker.slider.LightnessSlider;
 
 public class ColorPickerDialogBuilder {
-	private AlertDialog.Builder builder;
-	private LinearLayout pickerContainer;
-	private ColorPickerView colorPickerView;
+	private final AlertDialog.Builder builder;
+	private final LinearLayout pickerContainer;
+	private final ColorPickerView colorPickerView;
 
   private boolean isLightnessSliderEnabled = true;
 	private boolean isAlphaSliderEnabled = true;
@@ -34,7 +34,7 @@ public class ColorPickerDialogBuilder {
 	private boolean isColorEditEnabled = false;
 	private boolean isPreviewEnabled = false;
 	private int pickerCount = 1;
-  private Integer[] initialColor = new Integer[]{null, null, null, null, null};
+  private final Integer[] initialColor = new Integer[]{null, null, null, null, null};
 
 	private ColorPickerDialogBuilder(Context context) {
 		this(context, 0);

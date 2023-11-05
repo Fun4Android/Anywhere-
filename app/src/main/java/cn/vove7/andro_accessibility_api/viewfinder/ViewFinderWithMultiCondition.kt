@@ -72,7 +72,7 @@ class ViewFinderWithMultiCondition(node: ViewNode? = null) : ViewFinder(node) {
 
     val pp = p!!
     return if (typeNames.isNotEmpty()) {
-      if ("${pp.className}".contains(typeNames[0], ignoreCase = true))
+      if (pp.className.contains(typeNames[0], ignoreCase = true))
         pp
       else {
         null

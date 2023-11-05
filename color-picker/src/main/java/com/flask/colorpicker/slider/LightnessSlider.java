@@ -13,9 +13,9 @@ import com.flask.colorpicker.builder.PaintBuilder;
 
 public class LightnessSlider extends AbsCustomSlider {
 	private int color;
-	private Paint barPaint = PaintBuilder.newPaint().build();
-	private Paint solid = PaintBuilder.newPaint().build();
-	private Paint clearingStroke = PaintBuilder.newPaint().color(0xffffffff).xPerMode(PorterDuff.Mode.CLEAR).build();
+	private final Paint barPaint = PaintBuilder.newPaint().build();
+	private final Paint solid = PaintBuilder.newPaint().build();
+	private final Paint clearingStroke = PaintBuilder.newPaint().color(0xffffffff).xPerMode(PorterDuff.Mode.CLEAR).build();
 
 	private ColorPickerView colorPicker;
 

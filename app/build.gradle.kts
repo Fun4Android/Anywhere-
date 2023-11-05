@@ -21,13 +21,14 @@ android {
   defaultConfig {
     applicationId = "com.absinthe.anywhere_"
     namespace = "com.absinthe.anywhere_"
-    minSdk = 24
+    minSdk = 23
     targetSdk = 33
     versionCode = verCode
     versionName = verName
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     manifestPlaceholders["appName"] = "Anywhere-"
     ndk {
+      //noinspection ChromeOsAbiSupport
       abiFilters += arrayOf("arm64-v8a")
     }
     resourceConfigurations += arrayOf("en", "zh-rCN", "zh-rTW", "zh-rHK")
@@ -99,6 +100,7 @@ android {
       excludes += "kotlin/**"
       excludes += "org/**"
       excludes += "**.properties"
+      excludes += "**.bin"
       excludes += "XPP3_1.1.3.2_VERSION"
       excludes += "XPP3_1.1.3.3_VERSION"
     }
