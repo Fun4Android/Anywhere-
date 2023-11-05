@@ -285,7 +285,7 @@ class AboutActivity : AbsAboutActivity() {
               prepare()
               start()
             }
-          } catch (e: Exception) {
+          } catch (_: Exception) {
           }
         } else {
           GlobalValues.sIsDebugMode = true
