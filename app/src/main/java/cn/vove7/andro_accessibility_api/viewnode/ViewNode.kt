@@ -285,7 +285,7 @@ class ViewNode(val node: AccessibilityNodeInfo) : ViewOperation, Comparable<View
 
   val className get() = classType
 
-  val classType: String?
+  val classType: String
     get() = node.className.let { it.substring(it.lastIndexOf('.') + 1) }
 
 

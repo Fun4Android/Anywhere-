@@ -244,7 +244,7 @@ public class LogRecorder {
           if (!mRunning) {
             break;
           }
-          if (line.length() == 0) {
+          if (line.isEmpty()) {
             continue;
           }
           if (out != null) {

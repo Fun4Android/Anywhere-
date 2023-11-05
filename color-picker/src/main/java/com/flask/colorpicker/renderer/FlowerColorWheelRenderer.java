@@ -9,9 +9,8 @@ import com.flask.colorpicker.builder.PaintBuilder;
 public class FlowerColorWheelRenderer extends AbsColorWheelRenderer {
 	private Paint selectorFill = PaintBuilder.newPaint().build();
 	private float[] hsv = new float[3];
-	private float sizeJitter = 1.2f;
 
-	@Override
+  @Override
 	public void draw() {
 		final int setSize = colorCircleList.size();
 		int currentCount = 0;
@@ -25,7 +24,8 @@ public class FlowerColorWheelRenderer extends AbsColorWheelRenderer {
 			float p = (float) i / (density - 1); // 0~1
 			float jitter = (i - density / 2f) / density; // -0.5 ~ 0.5
 			float radius = maxRadius * p;
-			float size = Math.max(1.5f + strokeWidth, cSize + (i == 0 ? 0 : cSize * sizeJitter * jitter));
+      float sizeJitter = 1.2f;
+      float size = Math.max(1.5f + strokeWidth, cSize + (i == 0 ? 0 : cSize * sizeJitter * jitter));
 			int total = Math.min(calcTotalCount(radius, size), density * 2);
 
 			for (int j = 0; j < total; j++) {

@@ -18,8 +18,7 @@ public class AlphaSlider extends AbsCustomSlider {
 	private Paint solid = PaintBuilder.newPaint().build();
 	private Paint clearingStroke = PaintBuilder.newPaint().color(0xffffffff).xPerMode(PorterDuff.Mode.CLEAR).build();
 
-	private Paint clearStroke = PaintBuilder.newPaint().build();
-	private Bitmap clearBitmap;
+  private Bitmap clearBitmap;
 	private Canvas clearBitmapCanvas;
 
 	private ColorPickerView colorPicker;
@@ -77,7 +76,7 @@ public class AlphaSlider extends AbsCustomSlider {
 			clearBitmapCanvas.drawCircle(x, y, handleRadius * 0.75f + 4, alphaPatternPaint);
 			clearBitmapCanvas.drawCircle(x, y, handleRadius * 0.75f + 4, solid);
 
-			clearStroke = PaintBuilder.newPaint().color(0xffffffff).style(Paint.Style.STROKE).stroke(6).xPerMode(PorterDuff.Mode.CLEAR).build();
+      Paint clearStroke = PaintBuilder.newPaint().color(0xffffffff).style(Paint.Style.STROKE).stroke(6).xPerMode(PorterDuff.Mode.CLEAR).build();
 			clearBitmapCanvas.drawCircle(x, y, handleRadius * 0.75f + (clearStroke.getStrokeWidth() / 2), clearStroke);
 			canvas.drawBitmap(clearBitmap, 0, 0, null);
 		} else {

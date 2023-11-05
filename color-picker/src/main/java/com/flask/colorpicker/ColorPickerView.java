@@ -40,15 +40,13 @@ public class ColorPickerView extends View {
 
 	private float lightness = 1;
 	private float alpha = 1;
-	private int backgroundColor = 0x00000000;
 
-	private Integer[] initialColors = new Integer[]{null, null, null, null, null};
+  private Integer[] initialColors = new Integer[]{null, null, null, null, null};
 	private int colorSelection = 0;
 	private Integer initialColor;
 	private Integer pickerColorEditTextColor;
 	private Paint colorWheelFill = PaintBuilder.newPaint().color(0).build();
-	private Paint selectorStroke = PaintBuilder.newPaint().color(0).build();
-	private Paint alphaPatternPaint = PaintBuilder.newPaint().build();
+  private Paint alphaPatternPaint = PaintBuilder.newPaint().build();
 	private ColorCircle currentColorCircle;
 
 	private ArrayList<OnColorChangedListener> colorChangedListeners = new ArrayList<>();
@@ -276,7 +274,8 @@ public class ColorPickerView extends View {
 	@Override
 	protected void onDraw(@NonNull Canvas canvas) {
 		super.onDraw(canvas);
-		canvas.drawColor(backgroundColor);
+    int backgroundColor = 0x00000000;
+    canvas.drawColor(backgroundColor);
 
 		float maxRadius = canvas.getWidth() / (1f + ColorWheelRenderer.GAP_PERCENTAGE);
 		float size = maxRadius / density / 2;
@@ -289,7 +288,7 @@ public class ColorPickerView extends View {
 			currentColorCanvas.drawCircle(currentColorCircle.getX(), currentColorCircle.getY(), size + 4, alphaPatternPaint);
 			currentColorCanvas.drawCircle(currentColorCircle.getX(), currentColorCircle.getY(), size + 4, colorWheelFill);
 
-			selectorStroke = PaintBuilder.newPaint().color(0xffffffff).style(Paint.Style.STROKE).stroke(size * (STROKE_RATIO - 1)).xPerMode(PorterDuff.Mode.CLEAR).build();
+      Paint selectorStroke = PaintBuilder.newPaint().color(0xffffffff).style(Paint.Style.STROKE).stroke(size * (STROKE_RATIO - 1)).xPerMode(PorterDuff.Mode.CLEAR).build();
 
 			if (showBorder) colorWheelCanvas.drawCircle(currentColorCircle.getX(), currentColorCircle.getY(), size + (selectorStroke.getStrokeWidth() / 2f), selectorStroke);
 			canvas.drawBitmap(colorWheel, 0, 0, null);
