@@ -2,7 +2,7 @@ import java.nio.file.Paths
 
 plugins {
   id("com.android.application")
-  kotlin("android")
+  id("org.jetbrains.kotlin.android")
   id("com.google.devtools.ksp")
   id("kotlin-parcelize")
   id("dev.rikka.tools.materialthemebuilder")
@@ -12,13 +12,13 @@ val verName = "2.5.5"
 val verCode = 2050500
 
 android {
+  namespace = "com.absinthe.anywhere_"
   compileSdk = 34
   buildToolsVersion = "35.0.0"
   ndkVersion = "27.0.12077973"
 
   defaultConfig {
     applicationId = "com.absinthe.anywhere_"
-    namespace = "com.absinthe.anywhere_"
     minSdk = 23
     targetSdk = 33
     versionCode = verCode
@@ -53,10 +53,7 @@ android {
     release {
       isMinifyEnabled = true
       isShrinkResources = true
-      proguardFiles(
-        getDefaultProguardFile("proguard-android-optimize.txt"),
-        "proguard-rules.pro"
-      )
+      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
       buildConfigField("boolean", "BETA", "false")
     }
     all {
@@ -131,10 +128,6 @@ materialThemeBuilder {
     }
   }
   generatePalette = true
-}
-
-repositories {
-  mavenCentral()
 }
 
 tasks.register("optimizeReleaseRes") {
