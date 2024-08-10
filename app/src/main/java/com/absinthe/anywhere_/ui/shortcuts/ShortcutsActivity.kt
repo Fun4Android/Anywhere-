@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.IBinder
 import android.widget.ArrayAdapter
 import androidx.activity.viewModels
+import androidx.core.content.IntentCompat
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
@@ -110,7 +111,7 @@ class ShortcutsActivity : BaseActivity<ViewBinding>() {
           }
         }
         ACTION_START_FROM_WIDGET -> {
-          intent.getParcelableExtra<AnywhereEntity>(Const.INTENT_EXTRA_WIDGET_ENTITY)
+          IntentCompat.getParcelableExtra(intent, Const.INTENT_EXTRA_WIDGET_ENTITY, AnywhereEntity::class.java)
             ?.let { entity ->
               Opener.with(this@ShortcutsActivity)
                 .load(entity)

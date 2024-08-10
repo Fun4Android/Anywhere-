@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import androidx.core.app.JobIntentService
+import androidx.core.content.IntentCompat
 import com.absinthe.anywhere_.constants.AnywhereType
 import com.absinthe.anywhere_.model.database.AnywhereEntity
 import com.absinthe.anywhere_.model.viewholder.FlowStepBean
@@ -27,7 +28,7 @@ class WorkflowIntentService : JobIntentService() {
   override fun onHandleWork(intent: Intent) {
     NotifyUtils.createWorkflowNotification(this)
 
-    val entity: AnywhereEntity? = intent.getParcelableExtra(EXTRA_ENTITY)
+    val entity: AnywhereEntity? = IntentCompat.getParcelableExtra(intent, EXTRA_ENTITY, AnywhereEntity::class.java)
 
     entity?.let { ett ->
       val flowStepList: List<FlowStepBean>? = try {

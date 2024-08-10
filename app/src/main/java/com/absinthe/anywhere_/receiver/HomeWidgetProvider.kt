@@ -9,6 +9,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.RemoteViews
+import androidx.core.content.IntentCompat
 import com.absinthe.anywhere_.BuildConfig
 import com.absinthe.anywhere_.R
 import com.absinthe.anywhere_.constants.AnywhereType
@@ -77,7 +78,7 @@ class HomeWidgetProvider : AppWidgetProvider() {
       val newIntent = Intent(context, ShortcutsActivity::class.java).apply {
         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
       }
-      val ae: AnywhereEntity? = intent.getParcelableExtra(Const.INTENT_EXTRA_WIDGET_ENTITY)
+      val ae: AnywhereEntity? = IntentCompat.getParcelableExtra(intent, Const.INTENT_EXTRA_WIDGET_ENTITY, AnywhereEntity::class.java)
 
       if (ae != null) {
         if (ae.type == AnywhereType.Card.IMAGE) {

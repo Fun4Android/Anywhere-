@@ -99,9 +99,13 @@
     static void checkNotNullParameter(java.lang.Object, java.lang.String);
 }
 
--dontwarn org.xmlpull.v1.XmlPullParser
--dontwarn org.xmlpull.v1.XmlSerializer
--keep class org.xmlpull.v1.* {*;}
+-dontwarn org.xmlpull.v1.**
+-dontwarn org.kxml2.io.**
+-dontwarn android.content.res.**
+-dontwarn org.slf4j.impl.StaticLoggerBinder
+
+-keep class org.xmlpull.** { *; }
+-keepclassmembers class org.xmlpull.** { *; }
 
 #Glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
@@ -142,11 +146,3 @@
 
 # gson-plugin
 -keep class com.ke.gson.** { *; }
-
--dontwarn org.xmlpull.v1.**
--dontwarn org.kxml2.io.**
--dontwarn android.content.res.**
--dontwarn org.slf4j.impl.StaticLoggerBinder
-
--keep class org.xmlpull.** { *; }
--keepclassmembers class org.xmlpull.** { *; }

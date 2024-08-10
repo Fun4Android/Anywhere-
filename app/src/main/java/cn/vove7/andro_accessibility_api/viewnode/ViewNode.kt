@@ -32,7 +32,7 @@ class ViewNode(val node: AccessibilityNodeInfo) : ViewOperation, Comparable<View
     private const val ROOT_TAG = "ViewNodeRoot"
 
     fun withChildren(cs: List<ViewNode>): ViewNode {
-      val root = AccessibilityNodeInfo.obtain()
+      val root = AccessibilityNodeInfo()
       root.className = "${ROOT_TAG}[Win Size: ${cs.size}]"
       return ViewNode(root).also {
         it.childrenCache = cs.toTypedArray()
@@ -46,7 +46,7 @@ class ViewNode(val node: AccessibilityNodeInfo) : ViewOperation, Comparable<View
   override val boundsInParent: Rect
     get() {
       val out = Rect()
-      node.getBoundsInParent(out)
+      node.getBoundsInScreen(out)
       return out
     }
 

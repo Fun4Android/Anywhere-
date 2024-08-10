@@ -277,7 +277,6 @@ class AboutActivity : AbsAboutActivity() {
             findViewById<TextView>(com.drakeet.about.R.id.slogan).text = "えい、私もよ。"
             setHeaderBackground(ColorDrawable(ContextCompat.getColor(this, R.color.renge)))
             setHeaderContentScrim(ColorDrawable(ContextCompat.getColor(this, R.color.renge)))
-            window.statusBarColor = ContextCompat.getColor(this, R.color.renge)
 
             val fd = assets.openFd("renge_no_koe.aac")
             MediaPlayer().apply {

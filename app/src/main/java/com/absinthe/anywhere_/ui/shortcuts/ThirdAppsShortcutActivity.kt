@@ -87,8 +87,7 @@ class ThirdAppsShortcutActivity : AppBarActivity<ActivityThirdAppsShortcutBindin
     ): SynchronousResult<Intent?>? = null
 
     override fun parseResult(resultCode: Int, intent: Intent?): Intent? {
-      return intent.takeIf { resultCode == Activity.RESULT_OK }
-        ?.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT) as? Intent
+      return intent.takeIf { resultCode == Activity.RESULT_OK }?.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT, Intent::class.java)
     }
   }
 }

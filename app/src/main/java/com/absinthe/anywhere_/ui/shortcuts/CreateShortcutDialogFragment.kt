@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.os.BundleCompat
 import com.absinthe.anywhere_.R
 import com.absinthe.anywhere_.constants.GlobalValues
 import com.absinthe.anywhere_.model.database.AnywhereEntity
@@ -40,7 +41,7 @@ class CreateShortcutDialogFragment : AnywhereDialogFragment() {
   }
 
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-    val entity = arguments?.getParcelable(EXTRA_ENTITY) ?: AnywhereEntity()
+    val entity = arguments?.let { BundleCompat.getParcelable(it, EXTRA_ENTITY, AnywhereEntity::class.java) } ?: AnywhereEntity()
     mBuilder = CreateShortcutDialogBuilder(requireContext())
     val builder = AnywhereDialogBuilder(requireContext())
     mBuilder.apply {

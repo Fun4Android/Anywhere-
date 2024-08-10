@@ -1,3 +1,4 @@
+import com.android.build.gradle.tasks.PackageAndroidArtifact
 import java.nio.file.Paths
 
 plugins {
@@ -95,11 +96,13 @@ android {
 
   packaging {
     resources {
-      excludes += "META-INF/**"
       excludes += "okhttp3/**"
       excludes += "kotlin/**"
       excludes += "org/**"
       excludes += "**.properties"
+
+      // https://stackoverflow.com/a/58956288
+      excludes += "META-INF/*.version"
       // https://github.com/Kotlin/kotlinx.coroutines?tab=readme-ov-file#avoiding-including-the-debug-infrastructure-in-the-resulting-apk
       excludes += "DebugProbesKt.bin"
       // https://issueantenna.com/repo/kotlin/kotlinx.coroutines/issues/3158
@@ -114,6 +117,11 @@ android {
     dex {
       useLegacyPackaging = false
     }
+  }
+
+  // https://stackoverflow.com/a/77745844
+  tasks.withType<PackageAndroidArtifact> {
+    doFirst { appMetadata.asFile.orNull?.writeText("") }
   }
 }
 
@@ -130,38 +138,41 @@ materialThemeBuilder {
   generatePalette = true
 }
 
-tasks.register("optimizeReleaseRes") {
-  doLast {
-    val aapt2 = File(
-      androidComponents.sdkComponents.sdkDirectory.get().asFile,
-      "build-tools/${project.android.buildToolsVersion}/aapt2"
+val optimizeReleaseRes: Task = task("optimizeReleaseRes").doLast {
+  val aapt2 = File(
+    androidComponents.sdkComponents.sdkDirectory.get().asFile,
+    "build-tools/${project.android.buildToolsVersion}/aapt2"
+  )
+  val zip = Paths.get(
+    buildDir.path,
+    "intermediates",
+    "optimized_processed_res",
+    "release",
+    "optimizeReleaseResources",
+    "resources-release-optimize.ap_"
+  )
+  val optimized = File("${zip}.opt")
+  val cmd = exec {
+    commandLine(
+      aapt2, "optimize",
+      "--collapse-resource-names",
+      "--resources-config-path",
+      "aapt2-resources.cfg",
+      "-o", optimized,
+      zip
     )
-    val zip = Paths.get(
-      buildDir.path,
-      "intermediates",
-      "optimized_processed_res",
-      "release",
-      "optimizeReleaseResources",
-      "resources-release-optimize.ap_"
-    )
-    val optimized = File("${zip}.opt")
-    val cmd = exec {
-      commandLine(
-        aapt2, "optimize",
-        "--collapse-resource-names",
-        "--resources-config-path",
-        "aapt2-resources.cfg",
-        "-o", optimized,
-        zip
-      )
-      isIgnoreExitValue = false
-    }
-    if (cmd.exitValue == 0) {
-      delete(zip)
-      optimized.renameTo(zip.toFile())
-    }
+    isIgnoreExitValue = false
   }
-  dependsOn("optimizeReleaseResources")
+  if (cmd.exitValue == 0) {
+    delete(zip)
+    optimized.renameTo(zip.toFile())
+  }
+}
+
+tasks.configureEach {
+  if (name == "optimizeReleaseResources") {
+    finalizedBy(optimizeReleaseRes)
+  }
 }
 
 configurations.all {

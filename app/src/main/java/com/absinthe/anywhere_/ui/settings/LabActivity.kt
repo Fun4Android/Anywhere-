@@ -14,6 +14,7 @@ import com.absinthe.anywhere_.constants.Const
 import com.absinthe.anywhere_.constants.GlobalValues
 import com.absinthe.anywhere_.databinding.ActivityLabBinding
 import com.absinthe.anywhere_.utils.AppUtils
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -37,6 +38,7 @@ class LabActivity : AppBarActivity<ActivityLabBinding>() {
 
   class LabFragment : PreferenceFragmentCompat() {
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
       setPreferencesFromResource(R.xml.settings_lab, null)
 

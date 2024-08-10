@@ -2,6 +2,7 @@ package com.absinthe.anywhere_.ui.dialog
 
 import android.app.Dialog
 import android.os.Bundle
+import androidx.core.os.BundleCompat
 import androidx.core.view.isGone
 import androidx.lifecycle.lifecycleScope
 import com.absinthe.anywhere_.AnywhereApplication
@@ -25,7 +26,7 @@ const val EXTRA_ENTITY = "EXTRA_ENTITY"
 
 class CloudRuleDetailDialogFragment : AnywhereDialogFragment() {
 
-  private val rule by lazy { arguments?.getParcelable(EXTRA_ENTITY) as? RuleEntity }
+  private val rule by lazy { arguments?.let { BundleCompat.getParcelable(it, EXTRA_ENTITY, RuleEntity::class.java) } }
   private var entity: AnywhereEntity? = null
   private lateinit var binding: LayoutCloudRuleDetailBinding
 

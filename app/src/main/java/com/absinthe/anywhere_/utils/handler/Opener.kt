@@ -583,6 +583,7 @@ object Opener {
     listener?.onOpened()
   }
 
+  @OptIn(DelicateCoroutinesApi::class)
   private fun openA11yEntity(context: Context, item: AnywhereEntity) {
     if (!Once.beenDone(Once.THIS_APP_INSTALL, OnceTag.A11Y_ANNOUNCEMENT)) {
       if (context is Activity) {

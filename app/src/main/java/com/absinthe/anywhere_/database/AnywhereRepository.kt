@@ -8,6 +8,7 @@ import com.absinthe.anywhere_.model.database.AnywhereEntity
 import com.absinthe.anywhere_.model.database.PageEntity
 import com.absinthe.anywhere_.utils.AppUtils
 import com.absinthe.anywhere_.utils.ShortcutsUtils
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -40,26 +41,31 @@ class AnywhereRepository(application: Application) {
     allAnywhereEntities = sortedEntities
   }
 
+  @OptIn(DelicateCoroutinesApi::class)
   fun insert(ae: AnywhereEntity) = GlobalScope.launch(Dispatchers.IO) {
     mAnywhereDao.insert(ae)
     GlobalValues.needBackup = true
   }
 
+  @OptIn(DelicateCoroutinesApi::class)
   fun insert(list: List<AnywhereEntity>) = GlobalScope.launch(Dispatchers.IO) {
     mAnywhereDao.insert(list)
     GlobalValues.needBackup = true
   }
 
+  @OptIn(DelicateCoroutinesApi::class)
   fun update(ae: AnywhereEntity) = GlobalScope.launch(Dispatchers.IO) {
     mAnywhereDao.update(ae)
     GlobalValues.needBackup = true
   }
 
+  @OptIn(DelicateCoroutinesApi::class)
   fun update(list: List<AnywhereEntity>) = GlobalScope.launch(Dispatchers.IO) {
     mAnywhereDao.update(list)
     GlobalValues.needBackup = true
   }
 
+  @OptIn(DelicateCoroutinesApi::class)
   fun delete(ae: AnywhereEntity, delayTime: Long = 0L) = GlobalScope.launch(Dispatchers.IO) {
     delay(delayTime)
     mAnywhereDao.delete(ae)
@@ -69,6 +75,7 @@ class AnywhereRepository(application: Application) {
     GlobalValues.needBackup = true
   }
 
+  @OptIn(DelicateCoroutinesApi::class)
   fun delete(list: List<AnywhereEntity>, delayTime: Long = 0L) =
     GlobalScope.launch(Dispatchers.IO) {
       delay(delayTime)
@@ -79,21 +86,25 @@ class AnywhereRepository(application: Application) {
       GlobalValues.needBackup = true
     }
 
+  @OptIn(DelicateCoroutinesApi::class)
   fun insertPage(pe: PageEntity) = GlobalScope.launch(Dispatchers.IO) {
     mAnywhereDao.insertPage(pe)
     GlobalValues.needBackup = true
   }
 
+  @OptIn(DelicateCoroutinesApi::class)
   fun insertPage(pageList: List<PageEntity>) = GlobalScope.launch(Dispatchers.IO) {
     mAnywhereDao.insertPage(pageList)
     GlobalValues.needBackup = true
   }
 
+  @OptIn(DelicateCoroutinesApi::class)
   fun updatePage(pe: PageEntity) = GlobalScope.launch(Dispatchers.IO) {
     mAnywhereDao.updatePage(pe)
     GlobalValues.needBackup = true
   }
 
+  @OptIn(DelicateCoroutinesApi::class)
   fun deletePage(pe: PageEntity) = GlobalScope.launch(Dispatchers.IO) {
     mAnywhereDao.deletePage(pe)
     GlobalValues.needBackup = true

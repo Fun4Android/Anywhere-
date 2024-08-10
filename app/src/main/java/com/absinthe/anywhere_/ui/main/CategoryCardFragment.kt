@@ -41,6 +41,7 @@ import com.absinthe.libraries.utils.extensions.paddingStartCompat
 import com.absinthe.libraries.utils.utils.XiaomiUtilities
 import com.blankj.utilcode.util.Utils
 import com.google.android.material.card.MaterialCardView
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -162,6 +163,7 @@ class CategoryCardFragment : Fragment() {
     }
   }
 
+  @OptIn(DelicateCoroutinesApi::class)
   fun createShortcutSelected() {
     DialogManager.showMultiSelectCreatingShortcutDialog(requireContext()) {
       GlobalScope.launch(Dispatchers.IO) {

@@ -6,13 +6,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
-import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.FileUriExposedException
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.annotation.CallSuper
@@ -115,12 +115,9 @@ abstract class BaseActivity<T : ViewBinding> : MaterialActivity() {
 
   override fun onApplyTranslucentSystemBars() {
     super.onApplyTranslucentSystemBars()
-    window.statusBarColor = Color.TRANSPARENT
-    window.decorView.post {
-      window.navigationBarColor = Color.TRANSPARENT
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-        window.isNavigationBarContrastEnforced = false
-      }
+    enableEdgeToEdge()
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+      window.isNavigationBarContrastEnforced = false
     }
   }
 
@@ -131,7 +128,7 @@ abstract class BaseActivity<T : ViewBinding> : MaterialActivity() {
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     if (item.itemId == android.R.id.home) {
-      onBackPressed()
+      onBackPressedDispatcher.onBackPressed()
     }
     return super.onOptionsItemSelected(item)
   }

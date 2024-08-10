@@ -16,6 +16,7 @@ import android.view.View
 import android.view.Window
 import android.widget.FrameLayout
 import androidx.annotation.RequiresApi
+import androidx.core.content.IntentCompat
 import androidx.core.text.HtmlCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -97,13 +98,12 @@ class EditorActivity : BaseActivity<ActivityEditorBinding>() {
     if (intent.action == ACTION_EDITOR) {
       entity = AnywhereEntity().apply {
         type = AnywhereType.Card.ACTIVITY
-        appName =
-          com.blankj.utilcode.util.AppUtils.getAppName(intent.getStringExtra(EXTRA_PACKAGE_NAME))
+        appName = com.blankj.utilcode.util.AppUtils.getAppName(intent.getStringExtra(EXTRA_PACKAGE_NAME))
         param1 = intent.getStringExtra(EXTRA_PACKAGE_NAME).toString()
         param2 = intent.getStringExtra(EXTRA_CLASS_NAME).toString()
       }
     } else {
-      (intent.getParcelableExtra(EXTRA_ENTITY) as? AnywhereEntity)?.let {
+      IntentCompat.getParcelableExtra(intent, EXTRA_ENTITY, AnywhereEntity::class.java)?.let {
         entity = it
       } ?: run {
         super.onCreate(savedInstanceState)

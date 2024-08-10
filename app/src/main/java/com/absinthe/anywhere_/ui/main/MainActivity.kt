@@ -31,8 +31,10 @@ import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
@@ -385,12 +387,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     if (GlobalValues.isPages) {
-      lifecycleScope.launchWhenResumed {
-        delay(2000)
+      lifecycleScope.launch {
+        lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+          delay(2000)
 
-        withContext(Dispatchers.Main) {
-          binding.tsTitle.setText(GlobalValues.category)
-          isTitleShown = true
+          withContext(Dispatchers.Main) {
+            binding.tsTitle.setText(GlobalValues.category)
+            isTitleShown = true
+          }
         }
       }
     }
