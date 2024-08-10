@@ -1,5 +1,3 @@
-import com.android.build.api.component.analytics.AnalyticsEnabledApplicationVariant
-import com.android.build.api.variant.impl.ApplicationVariantImpl
 import java.nio.file.Paths
 
 plugins {
@@ -31,6 +29,8 @@ android {
       abiFilters += arrayOf("armeabi-v7a", "arm64-v8a")
     }
     resourceConfigurations += arrayOf("en", "zh-rCN", "zh-rTW", "zh-rHK")
+
+    setProperty("archivesBaseName", "Anywhere-$versionName-$versionCode")
   }
 
   ksp {
@@ -68,17 +68,20 @@ android {
     }
   }
 
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+  java {
+    toolchain {
+      languageVersion = JavaLanguageVersion.of(17)
+    }
   }
 
-  androidComponents.onVariants { v ->
-    val variant: ApplicationVariantImpl =
-      if (v is ApplicationVariantImpl) v
-      else (v as AnalyticsEnabledApplicationVariant).delegate as ApplicationVariantImpl
-    variant.outputs.forEach {
-      it.outputFileName.set("Anywhere-${verName}-${verCode}-${variant.name}.apk")
+  kotlin {
+    jvmToolchain(17)
+    compilerOptions {
+      freeCompilerArgs = listOf(
+        "-Xno-param-assertions",
+        "-Xno-call-assertions",
+        "-Xno-receiver-assertions"
+      )
     }
   }
 
@@ -100,7 +103,13 @@ android {
       excludes += "kotlin/**"
       excludes += "org/**"
       excludes += "**.properties"
-      excludes += "**.bin"
+      // https://github.com/Kotlin/kotlinx.coroutines?tab=readme-ov-file#avoiding-including-the-debug-infrastructure-in-the-resulting-apk
+      excludes += "DebugProbesKt.bin"
+      // https://issueantenna.com/repo/kotlin/kotlinx.coroutines/issues/3158
+      excludes += "kotlin-tooling-metadata.json"
+
+      excludes += "XPP3_1.1.3.2_VERSION"
+      excludes += "XPP3_1.1.3.3_VERSION"
     }
     jniLibs {
       useLegacyPackaging = false
@@ -128,41 +137,38 @@ repositories {
   mavenCentral()
 }
 
-val optimizeReleaseRes: Task = task("optimizeReleaseRes").doLast {
-  val aapt2 = File(
-    androidComponents.sdkComponents.sdkDirectory.get().asFile,
-    "build-tools/${project.android.buildToolsVersion}/aapt2"
-  )
-  val zip = Paths.get(
-    buildDir.path,
-    "intermediates",
-    "optimized_processed_res",
-    "release",
-    "optimizeReleaseResources",
-    "resources-release-optimize.ap_"
-  )
-  val optimized = File("${zip}.opt")
-  val cmd = exec {
-    commandLine(
-      aapt2, "optimize",
-      "--collapse-resource-names",
-      "--resources-config-path",
-      "aapt2-resources.cfg",
-      "-o", optimized,
-      zip
+tasks.register("optimizeReleaseRes") {
+  doLast {
+    val aapt2 = File(
+      androidComponents.sdkComponents.sdkDirectory.get().asFile,
+      "build-tools/${project.android.buildToolsVersion}/aapt2"
     )
-    isIgnoreExitValue = false
+    val zip = Paths.get(
+      buildDir.path,
+      "intermediates",
+      "optimized_processed_res",
+      "release",
+      "optimizeReleaseResources",
+      "resources-release-optimize.ap_"
+    )
+    val optimized = File("${zip}.opt")
+    val cmd = exec {
+      commandLine(
+        aapt2, "optimize",
+        "--collapse-resource-names",
+        "--resources-config-path",
+        "aapt2-resources.cfg",
+        "-o", optimized,
+        zip
+      )
+      isIgnoreExitValue = false
+    }
+    if (cmd.exitValue == 0) {
+      delete(zip)
+      optimized.renameTo(zip.toFile())
+    }
   }
-  if (cmd.exitValue == 0) {
-    delete(zip)
-    optimized.renameTo(zip.toFile())
-  }
-}
-
-tasks.configureEach {
-  if (name == "optimizeReleaseResources") {
-    finalizedBy(optimizeReleaseRes)
-  }
+  dependsOn("optimizeReleaseResources")
 }
 
 configurations.all {

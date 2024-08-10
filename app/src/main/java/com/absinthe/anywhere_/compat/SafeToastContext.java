@@ -46,16 +46,9 @@ final class SafeToastContext extends ContextWrapper {
   }
 
 
-  private static final class WindowManagerWrapper implements WindowManager {
+  private record WindowManagerWrapper(@NonNull WindowManager base) implements WindowManager {
 
     private static final String TAG = "WindowManagerWrapper";
-    private final @NonNull
-    WindowManager base;
-
-
-    private WindowManagerWrapper(@NonNull WindowManager base) {
-      this.base = base;
-    }
 
 
     @Override
