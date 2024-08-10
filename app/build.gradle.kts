@@ -25,15 +25,30 @@ android {
     versionCode = verCode
     versionName = verName
     manifestPlaceholders["appName"] = "Anywhere-"
-    ndk {
-      //noinspection ChromeOsAbiSupport
-      abiFilters += arrayOf("armeabi-v7a", "arm64-v8a")
-    }
+
     resourceConfigurations += arrayOf("en", "zh-rCN", "zh-rTW", "zh-rHK")
 
     setProperty("archivesBaseName", "Anywhere-$versionName-$versionCode")
   }
 
+  splits {
+    abi {
+      // Enables building multiple APKs per ABI.
+      isEnable = true
+
+      // By default all ABIs are included, so use reset() and include to specify that you only
+      // want APKs for x86 and x86_64.
+
+      // Resets the list of ABIs for Gradle to create APKs for to none.
+      reset()
+
+      // Specifies a list of ABIs for Gradle to create APKs for.
+      include("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
+
+      // Specifies that you don't want to also generate a universal APK that includes all ABIs.
+      isUniversalApk = true
+    }
+  }
   ksp {
     arg("room.incremental", "true")
     arg("room.schemaLocation", "$projectDir/schemas")
@@ -143,29 +158,32 @@ val optimizeReleaseRes: Task = task("optimizeReleaseRes").doLast {
     androidComponents.sdkComponents.sdkDirectory.get().asFile,
     "build-tools/${project.android.buildToolsVersion}/aapt2"
   )
-  val zip = Paths.get(
-    buildDir.path,
-    "intermediates",
-    "optimized_processed_res",
-    "release",
-    "optimizeReleaseResources",
-    "resources-release-optimize.ap_"
-  )
-  val optimized = File("${zip}.opt")
-  val cmd = exec {
-    commandLine(
-      aapt2, "optimize",
-      "--collapse-resource-names",
-      "--resources-config-path",
-      "aapt2-resources.cfg",
-      "-o", optimized,
-      zip
+  val abi = listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64", "universal")
+  for (i in abi) {
+    val zip = Paths.get(
+      buildDir.path,
+      "intermediates",
+      "optimized_processed_res",
+      "release",
+      "optimizeReleaseResources",
+      "resources-$i-release-optimize.ap_"
     )
-    isIgnoreExitValue = false
-  }
-  if (cmd.exitValue == 0) {
-    delete(zip)
-    optimized.renameTo(zip.toFile())
+    val optimized = File("${zip}.opt")
+    val cmd = exec {
+      commandLine(
+        aapt2, "optimize",
+        "--collapse-resource-names",
+        "--resources-config-path",
+        "aapt2-resources.cfg",
+        "-o", optimized,
+        zip
+      )
+      isIgnoreExitValue = false
+    }
+    if (cmd.exitValue == 0) {
+      delete(zip)
+      optimized.renameTo(zip.toFile())
+    }
   }
 }
 
