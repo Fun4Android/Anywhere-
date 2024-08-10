@@ -1,5 +1,6 @@
 package com.absinthe.anywhere_.services.tile
 
+import android.app.PendingIntent
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.drawable.Icon
@@ -65,7 +66,12 @@ abstract class BaseTileService : TileService() {
     }
 
     if (id?.isNotEmpty() == true) {
-      startActivityAndCollapse(intent)
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+        startActivityAndCollapse(PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_IMMUTABLE))
+      } else {
+        @Suppress("DEPRECATION","StartActivityAndCollapseDeprecated")
+        startActivityAndCollapse(intent)
+      }
     }
     qsTile?.updateTile()
   }

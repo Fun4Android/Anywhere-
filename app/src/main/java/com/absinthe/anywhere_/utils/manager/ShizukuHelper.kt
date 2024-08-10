@@ -70,20 +70,9 @@ object ShizukuHelper {
   private fun showPermissionDialog(activity: Activity) {
     showGotoShizukuManagerDialog(activity) {
       val shizukuPackageName = "moe.shizuku.privileged.api"
-      val activityIntent = object : Intent() {
-        init {
-          addCategory(CATEGORY_LAUNCHER)
-          setPackage(shizukuPackageName)
-        }
-      }
-      val launcherActivity = activity.packageManager.queryIntentActivities(activityIntent, 0).get(0).activityInfo.name
-      val intent = if (launcherActivity != null) object : Intent(ACTION_MAIN) {
-        init {
-          addCategory(CATEGORY_LAUNCHER)
-          setClassName(shizukuPackageName, launcherActivity)
-          addFlags(FLAG_ACTIVITY_NEW_TASK)
-        }
-      } else null
+      val activityIntent = Intent().addCategory(Intent.CATEGORY_LAUNCHER).setPackage(shizukuPackageName)
+      val launcherActivity = activity.packageManager.queryIntentActivities(activityIntent, 0)[0].activityInfo.name
+      val intent = if (launcherActivity != null) Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER).setClassName(shizukuPackageName, launcherActivity).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) else null
       if (intent != null) {
         activity.startActivityForResult(intent, Const.REQUEST_CODE_SHIZUKU_PERMISSION)
       } else {

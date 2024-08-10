@@ -1,6 +1,5 @@
 package com.flask.colorpicker;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -470,10 +469,9 @@ public class ColorPickerView extends View {
 
 		for (int i = 0; i < children; i++) {
 			View childView = colorPreview.getChildAt(i);
-			if (!(childView instanceof LinearLayout))
+			if (!(childView instanceof LinearLayout childLayout))
 				continue;
-			LinearLayout childLayout = (LinearLayout) childView;
-			if (i == selectedColor) {
+      if (i == selectedColor) {
 				childLayout.setBackgroundColor(Color.WHITE);
 			}
 			ImageView childImage = childLayout.findViewById(R.id.image_preview);
@@ -512,10 +510,9 @@ public class ColorPickerView extends View {
 
 		for (int i = 0; i < children; i++) {
 			View childView = colorPreview.getChildAt(i);
-			if (!(childView instanceof LinearLayout))
+			if (!(childView instanceof LinearLayout childLayout))
 				continue;
-			LinearLayout childLayout = (LinearLayout) childView;
-			if (i == previewNumber) {
+      if (i == previewNumber) {
 				childLayout.setBackgroundColor(Color.WHITE);
 			} else {
 				childLayout.setBackgroundColor(Color.TRANSPARENT);
@@ -532,10 +529,9 @@ public class ColorPickerView extends View {
 			return;
 
 		View childView = colorPreview.getChildAt(colorSelection);
-		if (!(childView instanceof LinearLayout))
+		if (!(childView instanceof LinearLayout childLayout))
 			return;
-		LinearLayout childLayout = (LinearLayout) childView;
-		ImageView childImage = childLayout.findViewById(R.id.image_preview);
+    ImageView childImage = childLayout.findViewById(R.id.image_preview);
 		childImage.setImageDrawable(new ColorCircleDrawable(newColor));
 	}
 
@@ -556,13 +552,11 @@ public class ColorPickerView extends View {
 		FLOWER, CIRCLE;
 
 		public static WHEEL_TYPE indexOf(int index) {
-			switch (index) {
-				case 0:
-					return FLOWER;
-				case 1:
-					return CIRCLE;
-			}
-			return FLOWER;
-		}
+      return switch (index) {
+        case 0 -> FLOWER;
+        case 1 -> CIRCLE;
+        default -> FLOWER;
+      };
+    }
 	}
 }

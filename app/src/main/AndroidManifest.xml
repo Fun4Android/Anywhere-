@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools">
 
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -43,7 +44,7 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
     android:usesCleartextTraffic="true"
-    tools:targetApi="33">
+    tools:targetApi="35">
 
     <!--    Home    -->
     <activity
@@ -323,6 +324,7 @@
       android:name=".services.tile.CollectorTileService"
       android:enabled="true"
       android:exported="true"
+      android:foregroundServiceType="shortService"
       android:icon="@drawable/ic_logo"
       android:label="@string/tile_collector_on"
       android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
@@ -335,13 +337,15 @@
     <service
       android:name=".services.overlay.OverlayService"
       android:enabled="true"
-      android:exported="false" />
+      android:exported="false"
+      android:foregroundServiceType="dataSync" />
 
     <!--    Custom tile one service    -->
     <service
       android:name=".services.tile.TileService1"
       android:enabled="false"
       android:exported="true"
+      android:foregroundServiceType="shortService"
       android:icon="@drawable/ic_android"
       android:label="Tile1"
       android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
@@ -355,6 +359,7 @@
       android:name=".services.tile.TileService2"
       android:enabled="false"
       android:exported="true"
+      android:foregroundServiceType="shortService"
       android:icon="@drawable/ic_android"
       android:label="Tile2"
       android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
@@ -368,6 +373,7 @@
       android:name=".services.tile.TileService3"
       android:enabled="false"
       android:exported="true"
+      android:foregroundServiceType="shortService"
       android:icon="@drawable/ic_android"
       android:label="Tile3"
       android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
@@ -381,6 +387,7 @@
       android:name=".services.tile.TileService4"
       android:enabled="false"
       android:exported="true"
+      android:foregroundServiceType="shortService"
       android:icon="@drawable/ic_android"
       android:label="Tile4"
       android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
@@ -394,6 +401,7 @@
       android:name=".services.tile.TileService5"
       android:enabled="false"
       android:exported="true"
+      android:foregroundServiceType="shortService"
       android:icon="@drawable/ic_android"
       android:label="Tile5"
       android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
@@ -407,6 +415,7 @@
       android:name=".services.tile.TileService6"
       android:enabled="false"
       android:exported="true"
+      android:foregroundServiceType="shortService"
       android:icon="@drawable/ic_android"
       android:label="Tile6"
       android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
@@ -420,6 +429,7 @@
       android:name=".services.tile.TileService7"
       android:enabled="false"
       android:exported="true"
+      android:foregroundServiceType="shortService"
       android:icon="@drawable/ic_android"
       android:label="Tile7"
       android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
@@ -431,18 +441,21 @@
     <!--    Collector service    -->
     <service
       android:name=".services.overlay.CollectorService"
-      android:enabled="true" />
+      android:enabled="true"
+      android:foregroundServiceType="dataSync" />
 
     <!--    Home launcher widget service    -->
     <service
       android:name=".services.widget.AppRemoteViewsService"
       android:exported="true"
+      android:foregroundServiceType="dataSync"
       android:permission="android.permission.BIND_REMOTEVIEWS" />
 
     <!--    Accessibility service    -->
     <service
       android:name=".services.IzukoService"
       android:exported="false"
+      android:foregroundServiceType="dataSync"
       android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
       <intent-filter>
         <action android:name="android.accessibilityservice.AccessibilityService" />
@@ -457,17 +470,20 @@
     <service
       android:name=".services.WorkflowIntentService"
       android:exported="true"
+      android:foregroundServiceType="dataSync"
       android:permission="android.permission.BIND_JOB_SERVICE" />
 
     <!--    Backup service    -->
     <service
       android:name=".services.BackupIntentService"
       android:exported="false"
+      android:foregroundServiceType="dataSync"
       android:permission="android.permission.BIND_JOB_SERVICE" />
     <!--    Device Control    -->
     <service
       android:name=".services.widget.AwControlsProviderService"
       android:exported="true"
+      android:foregroundServiceType="dataSync"
       android:permission="android.permission.BIND_CONTROLS">
       <intent-filter>
         <action android:name="android.service.controls.ControlsProviderService" />

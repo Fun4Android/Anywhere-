@@ -5,11 +5,13 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MANIFEST
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.app.ServiceCompat
 import androidx.core.app.TaskStackBuilder
 import androidx.core.content.ContextCompat
 import com.absinthe.anywhere_.AnywhereApplication
@@ -62,7 +64,11 @@ object NotifyUtils {
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
         param.setCategory(Notification.CATEGORY_NAVIGATION)
       }
-      context.startForeground(COLLECTOR_NOTIFICATION_ID, param.build())
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        context.startForeground(BACKUP_NOTIFICATION_ID, param.build(), FOREGROUND_SERVICE_TYPE_MANIFEST)
+      } else {
+        context.startForeground(BACKUP_NOTIFICATION_ID, param.build())
+      }
     }
   }
 
@@ -101,7 +107,7 @@ object NotifyUtils {
       return
     }
     NotificationUtils.cancel(COLLECTOR_NOTIFICATION_ID)
-    context.stopForeground(true)
+    ServiceCompat.stopForeground(context, ServiceCompat.STOP_FOREGROUND_REMOVE)
   }
 
   fun createLogcatNotification(context: Context) {
@@ -159,7 +165,11 @@ object NotifyUtils {
         .setProgress(0, 0, true)
         .setOngoing(true)
         .setAutoCancel(false)
-      context.startForeground(BACKUP_NOTIFICATION_ID, param.build())
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        context.startForeground(BACKUP_NOTIFICATION_ID, param.build(), FOREGROUND_SERVICE_TYPE_MANIFEST)
+      } else {
+        context.startForeground(BACKUP_NOTIFICATION_ID, param.build())
+      }
     }
   }
 
@@ -187,7 +197,11 @@ object NotifyUtils {
         .setProgress(0, 0, true)
         .setOngoing(true)
         .setAutoCancel(false)
-      context.startForeground(WORKFLOW_NOTIFICATION_ID, param.build())
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        context.startForeground(BACKUP_NOTIFICATION_ID, param.build(), FOREGROUND_SERVICE_TYPE_MANIFEST)
+      } else {
+        context.startForeground(BACKUP_NOTIFICATION_ID, param.build())
+      }
     }
   }
 }

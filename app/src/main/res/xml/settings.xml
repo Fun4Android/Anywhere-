@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
 
   <PreferenceCategory
     app:key="normalCategory"
@@ -121,7 +122,8 @@
 
       <intent
         android:targetClass="com.absinthe.anywhere_.ui.settings.TileSettingsActivity"
-        android:targetPackage="@string/application_id" />
+        android:targetPackage="@string/application_id"
+        tools:targetApi="n" />
     </Preference>
 
     <rikka.material.preference.MaterialSwitchPreference

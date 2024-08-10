@@ -13,14 +13,14 @@ val verCode = 2050500
 
 android {
   namespace = "com.absinthe.anywhere_"
-  compileSdk = 34
+  compileSdk = 35
   buildToolsVersion = "35.0.0"
   ndkVersion = "27.0.12077973"
 
   defaultConfig {
     applicationId = "com.absinthe.anywhere_"
     minSdk = 23
-    targetSdk = 33
+    targetSdk = 35
     versionCode = verCode
     versionName = verName
     manifestPlaceholders["appName"] = "Anywhere-"
@@ -203,7 +203,7 @@ dependencies {
   implementation("androidx.drawerlayout:drawerlayout:1.2.0")
 
   // KTX
-  implementation("androidx.collection:collection-ktx:1.4.0")
+  implementation("androidx.collection:collection-ktx:1.4.3")
   implementation("androidx.activity:activity-ktx:1.9.1")
   implementation("androidx.fragment:fragment-ktx:1.8.2")
   implementation("androidx.palette:palette-ktx:1.0.0")

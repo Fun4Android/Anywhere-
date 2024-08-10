@@ -123,7 +123,7 @@ class AppDetailActivity : AppBarActivity<ActivityAppDetailBinding>(),
             PackageManager.GET_DISABLED_COMPONENTS
           }
           packageManager.getPackageArchiveInfo(
-            packageInfo.applicationInfo.sourceDir,
+            packageInfo.applicationInfo!!.sourceDir,
             PackageManager.GET_ACTIVITIES or pmFlag
           )
         }

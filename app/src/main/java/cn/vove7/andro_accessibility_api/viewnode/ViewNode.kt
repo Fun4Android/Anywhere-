@@ -304,7 +304,7 @@ class ViewNode(val node: AccessibilityNodeInfo) : ViewOperation, Comparable<View
 
   override var isVisibleToUser: Boolean
     get() {
-      return if (className?.startsWith(ROOT_TAG) == true) true
+      return if (className.startsWith(ROOT_TAG) == true) true
       else node.isVisibleToUser
     }
     set(value) {

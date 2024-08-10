@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.EditTextPreference
@@ -56,7 +57,7 @@ class BackupActivity : AppBarActivity<ActivityBackupBinding>() {
     override fun onAttach(context: Context) {
       super.onAttach(context)
       backupResultLauncher =
-        registerForActivityResult(ActivityResultContracts.CreateDocument()) {
+        registerForActivityResult(CreateDocument("todo/todo")) {
           it?.let {
             try {
               Utils.getApp().contentResolver.openOutputStream(it)?.let { os ->
