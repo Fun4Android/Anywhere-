@@ -4,7 +4,7 @@ plugins {
   id("com.android.application")
   id("org.jetbrains.kotlin.android")
   id("com.google.devtools.ksp")
-  id("kotlin-parcelize")
+  id("org.jetbrains.kotlin.plugin.parcelize")
   id("dev.rikka.tools.materialthemebuilder")
 }
 
@@ -193,7 +193,6 @@ dependencies {
 
   val lifecycleVersion = "2.8.4"
   implementation("androidx.lifecycle:lifecycle-livedata-ktx:${lifecycleVersion}")
-  implementation("androidx.lifecycle:lifecycle-common-java8:${lifecycleVersion}")
   implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}")
 
   implementation("androidx.browser:browser:1.8.0")

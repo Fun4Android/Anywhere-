@@ -1,12 +1,9 @@
 package cn.vove7.andro_accessibility_api.utils
 
-import android.content.Context
 import android.graphics.Point
 import android.graphics.RectF
 import android.util.DisplayMetrics
 import android.util.Pair
-import android.view.WindowManager
-import com.blankj.utilcode.util.Utils
 
 /**
  * # ScreenAdapter
@@ -20,16 +17,12 @@ object ScreenAdapter {
 
   init {
     val m = DisplayMetrics()
-    (Utils.getApp().getSystemService(Context.WINDOW_SERVICE) as WindowManager)
-      .defaultDisplay.getRealMetrics(m)
     deviceHeight = m.heightPixels
     deviceWidth = m.widthPixels
   }
 
-  var relHeight =
-    deviceHeight
-  var relWidth =
-    deviceWidth
+  var relHeight = deviceHeight
+  var relWidth = deviceWidth
 
   fun setScreenSize(width: Int, height: Int) {
     relHeight = height

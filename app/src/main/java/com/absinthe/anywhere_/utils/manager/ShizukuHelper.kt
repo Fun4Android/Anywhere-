@@ -1,6 +1,7 @@
 package com.absinthe.anywhere_.utils.manager
 
 import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import androidx.core.app.ActivityCompat.requestPermissions
 import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
@@ -11,15 +12,12 @@ import com.absinthe.anywhere_.utils.ToastUtil
 import com.absinthe.anywhere_.utils.handler.URLSchemeHandler
 import com.absinthe.anywhere_.utils.manager.DialogManager.showGotoShizukuManagerDialog
 import com.absinthe.libraries.utils.utils.XiaomiUtilities
-import com.blankj.utilcode.util.IntentUtils
 import rikka.shizuku.Shizuku
 import rikka.shizuku.ShizukuProvider
 import timber.log.Timber
 
-
 /**
  * Shizuku Helper
- *
  *
  * Init Shizuku API.
  */
@@ -71,7 +69,21 @@ object ShizukuHelper {
 
   private fun showPermissionDialog(activity: Activity) {
     showGotoShizukuManagerDialog(activity) {
-      val intent = IntentUtils.getLaunchAppIntent("moe.shizuku.privileged.api")
+      val shizukuPackageName = "moe.shizuku.privileged.api"
+      val activityIntent = object : Intent() {
+        init {
+          addCategory(CATEGORY_LAUNCHER)
+          setPackage(shizukuPackageName)
+        }
+      }
+      val launcherActivity = activity.packageManager.queryIntentActivities(activityIntent, 0).get(0).activityInfo.name
+      val intent = if (launcherActivity != null) object : Intent(ACTION_MAIN) {
+        init {
+          addCategory(CATEGORY_LAUNCHER)
+          setClassName(shizukuPackageName, launcherActivity)
+          addFlags(FLAG_ACTIVITY_NEW_TASK)
+        }
+      } else null
       if (intent != null) {
         activity.startActivityForResult(intent, Const.REQUEST_CODE_SHIZUKU_PERMISSION)
       } else {
